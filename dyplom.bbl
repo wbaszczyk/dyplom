@@ -1,0 +1,46 @@
+\begin{thebibliography}{1}
+
+\bibitem{iot-art}
+ARM.
+\newblock White paper what the internet of things (iot) needs to become a
+  reality. global strategy and business development.
+\newblock In {\em Freescale and Emerging Technologies}, June 2014.
+
+\bibitem{kukdm-art}
+W.~Baszczyk and W.~Funika.
+\newblock Building a high-level interface with esp8266 for management of
+  devices in iot.
+\newblock In {\em Proceedings of Cracow Grid Workshop}. ACC CYFRONET AGH, March
+  2016.
+
+\bibitem{contiki-www}
+{Contiki}.
+\newblock The open source os for the internet of things.
+\newblock \url{http://www.contiki-os.org/}.
+
+\bibitem{iot-www}
+{Kevin Ashton}.
+\newblock That 'internet of things' thing.
+\newblock \url{http://www.rfidjournal.com/articles/view?4986}.
+
+\bibitem{raspberry-www}
+{Raspberry Pi Foundation}.
+\newblock Raspberry pi.
+\newblock \url{https://www.raspberrypi.org/}.
+
+\bibitem{contiki-hardware-www}
+{Texas Instruments}.
+\newblock Contiki hardware.
+\newblock \url{http://www.contiki-os.org/hardware.html}.
+
+\bibitem{windows-iot-www}
+{Windows}.
+\newblock Windows 10 iot core.
+\newblock \url{https://developer.microsoft.com/en-us/windows/iot}.
+
+\bibitem{zetta-www}
+{Zetta}.
+\newblock An api-first internet of things platform.
+\newblock \url{http://www.zettajs.org/}.
+
+\end{thebibliography}

@@ -1,0 +1,68 @@
+\section{Organizacja pracy}
+\label{sec:organizacja-pracy}
+Prace planowane są na okres dwóch semestrów (10 miesięcy). W tym czasie powinien zostać dostarczony działający produkt wraz z kompletną dokumentacją.
+
+\subsection{Założenia}
+Zespół ustalił, że kod źródłowy projektu będzie zarządzany przez system kontroli wersji git, z repozytorium zdalnym hostowanym przez serwis github.com. Wszelkie zmiany będą konsultowane między członkami zespołu, jednak bez przeprowadzania formalnego code-review. Każdy członek zespołu jest odpowiedzialny za części projektu, których wykonania się podejmuje.
+
+Ponieważ zespół budują tylko dwie osoby, do zarządzania projektem nie są potrzebne dodatkowe narzędzia.
+
+\subsection{Skrócony plan prac}
+Prace nad prototypem stanowiącym wstęp  do projektu inżynierskiego rozpoczęły się już w lutym 2013 roku. Wstępny prototyp, symulacja w języku Java, został dostarczony w tym samym miesiąc (Iteracja I). Później prace zostały wstrzymane, aż do okresu styczeń-luty 2014, kiedy na podstawie wstępnego prototypu został utworzony nowy prototyp, przepisany w całości do języka Erlang (Iteracja II).
+
+Właściwy czas realizacji projektu to okres marzec 2014 - styczeń 2015 (Iteracje III, IV, V), który zakończył się dostarczeniem gotowego produktu. Poniżej przedstawione są kolejne kamienie milowe (z tego okresu) wraz z iteracjami w jakich zostały osiągnięte:
+
+\begin{itemize}
+	\item Iteracja III: marzec 2014 - czerwiec 2014
+	\begin{itemize}
+		\item sprawdzenie możliwości integracji jednego z systemów: Riak \cite{riak-core-www} / MongoDB \cite{mongo-www} z istniejącym prototypem w celu składowania metadanych
+		\item ustalenie finalnego interfejsu dla REST API
+		\item implementacja logiki systemu (z pominięciem kwestii wydajnościowych)
+		\item implementacja graficznego interfejsu użytkownika
+	\end{itemize}
+	\item Iteracja IV: lipiec 2014 - październik 2014
+	\begin{itemize}
+		\item analiza wydajności, profilowanie
+		\item poprawki i optymalizacje kodu z uwzględnieniem wydajności i skalowalności
+		\item prezentacja wyników na konferencji Cracow Grid Workshop '14
+	\end{itemize}
+	\item Iteracja V: listopad 2014 - styczeń 2015
+	\begin{itemize}
+		\item dostarczenie projektu klientowi
+		\item dostarczenie dokumentacji
+	\end{itemize}
+\end{itemize}
+
+
+
+\subsection{Wykorzystane narzędzia}
+W trakcie procesu projektowania i implementacji systemu wykorzystano szereg narzędzi wspomagających. Poniżej przedstawiono listę zawierającą niektóre z nich, wraz z opisem, do czego zostały użyte:
+
+\begin{description}
+	\item[github.com]\cite{github-www} Podstawowe narzędzie pracy, umożliwiające wygodne zarządzanie plikami źródłowymi oraz historią ich edycji.  Nowe funkcjonalności będą rozwijane w osobnych feature-branchach, a następnie włączane do głównej gałęzi
+	\item[Visual Paradigm]\cite{paradigm-www} Narzędzie do tworzenia wykresów UML wchodzących w skład dokumentacji
+	\item[Microsoft Visio]\cite{visio-www} Narzędzie do tworzenia wykresów UML oraz schematów do prezentacji i plakatów konferencyjnych
+	\item[Erlang fprof]\cite{fprof-www} Profiler dla aplikacji napisanych w Erlangu. Pozwala zmierzyć czas i częstotliwość wykonywania poszczególnych fragmentów kodu źródłowego. Jest to podstawowe narzędzie do diagnozowania problemów z wydajnością aplikacji
+	\item[KCacheGrind]\cite{grind-www} Program wizualizujący dane wyjściowe pochodzące z profilera w postaci Call Graph, ilustrującego wywołania konkretnych funkcji
+	\item[Mathematica]\cite{mathematica-www} Pakiet obliczeniowy, wykorzystany przy obróbce danych pochodzących z pomiarów wydajności systemu. Przy jego pomocy wizualizowano oraz analizowano te dane, a następnie wprowadzano do aplikacji odpowiednie poprawki
+\end{description}
+
+\subsection{Podział ról w zespole}
+Przed rozpoczęciem prac ustalono następujący podział zadań między członków zespołu:
+
+\begin{itemize}
+\item Michał Liszcz
+\begin{itemize}
+	\item implementacja warstwy logicznej systemu
+	\item przygotowanie testów wydajnościowych i analiza wyników
+	\item testowanie systemu
+	\item prowadzenie dokumentacji projektowej
+\end{itemize}
+
+\item Wojciech Baszczyk
+\begin{itemize}
+	\item implementacja graficznych interfejsów użytkownika
+	\item testowanie systemu
+	\item prowadzenie dokumentacji projektowej
+\end{itemize}
+\end{itemize}

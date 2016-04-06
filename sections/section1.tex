@@ -1,0 +1,77 @@
+\section{Cel prac i wizja produktu}
+\label{sec:cel-wizja}
+Praca polega na stworzeniu infrastruktury na którą składają się urządzenia \textbf{ESP8266} ze szczególnym uwzględnieniem \textbf{topologii}, \textbf{niezawodności} jak i \textbf{uniwersalności} systemu. W pracy zbudowany został rozproszony system bazujący na układach ESP8266, realizujący komunikację z \textbf{mobilnym serwerem za pomocą zdefiniowanego interfejsu}. Zweryfikowana zostanie hipoteza o możliwości integracji modułów ESP8266 z koncepcją internetu rzeczy i możliwością dynamicznego rozszerzenia stworzonego systemu.
+
+\subsection{Charakterystyka problemu}
+
+Współcześnie istnieje bardzo wiele urządzeń komunikujących się ze sobą, tworzących swoistą sieć, nazwaną Internet rzeczy\cite{iot-art}. Jest to koncepcja, wedle której jednoznacznie identyfikowalne przedmioty mogą pośrednio lub bezpośrednio gromadzić, przetwarzać lub wymieniać dane za pośrednictwem sieci komputerowej. Do tego typu przedmiotów zaliczają się między innymi urządzenia gospodarstwa domowego, artykuły oświetleniowe i grzewcze\cite{iot-www}.
+
+Na rynku istnieje kilka rozwiązań pozwalających na zarządzanie tymi urządzeniami. Są to między innymi opisane szerzej w \autoref{sec:existing-systems} Contiki OS, Windows 10 IoT Core, Raspberry Pi czy Zetta.
+
+Celem projektu było stworzenie systemu o podobnej funkcjonalności, pozwalającej użytkownikom zarządzać, zbierać dane, sterować różnymi urządzeniami. Użytkownicy mają mieć wygodny i prosty w obsłudze interfejs. 
+
+Przyczyna powstania pomysłu, oraz problem i cel projektu, mając na uwadze przedstawione powyżej \textbf{tezy}, można formalnie przedstawić następująco:
+
+\begin{itemize}
+	\item \textbf{Przyczyna:} Diametralnie zwiększająca się ilość urządzeń wchodzących w skład Internetu rzeczy\cite{iot-art}.
+	\item \textbf{Problem:} Stworzenie uniwersalnego interfejsu do efektywnego zarządzania tymi urządzeniami.
+	\item \textbf{Rozwiązanie:} Dostarczenie modelu działającego w uproszczonym środowisku, dostarczającego wysokopoziomowy interfejs.
+\end{itemize}
+
+\subsection{Przegląd istniejących rozwiązań}
+\label{sec:existing-systems}
+Możliwość zdalnego konfigurowania urządzeń wchodzących w skład Internetu rzeczy przez użytkownika końcowego, bądź też samodzielnego działania układu w koncepcji IoT posiada niezliczoną ilość zastosowań w wielu obszarach, takich jak:
+
+ \begin{itemize}
+	\item Mieszkania,
+	\item Miasta,
+	\item Przemysł,
+	\item Transport
+\end{itemize}
+
+Istnieje kilka projektów adresujących ten problem. Przykładowe z nich to Contiki OS, Windows 10 IoT Core, Raspberry Pi oraz Zetta. Zapoznanie się z nimi, z rozwiązaniami w nich stosowanymi oraz z oferowanymi przez nie interfejsami pozwoliło uniknąć wielu błędów i problemów występujących podczas projektowania własnego systemu.
+
+\paragraph{Contiki OS}\cite{contiki-www} (The Open Source OS for the Internet of Things) \textbf{Contiki} łączy małe, tanie i energooszczędne mikrokontrolery z internetem. Contiki wspiera w pełni standard \textbf{IPv6} i \textbf{IPv4}, wraz z energooszczędnymi bezprzewodowymi standardami: \textbf{6lowpan}, \textbf{RPL}, \textbf{CoAP}. 
+
+Contiki oferuje łatwe i szybkie tworzenie oprogramowania, aplikacje są pisane w czystym C, wraz z symulatoram \textbf{Cooja} systemy te mogą być emulowane przed wrzucemeniem ich na hardware. Środowisko jest dostępne i całkowicie darmowe, co jest dużym plusem oprogramowania Contiki.
+
+Contiki można uruchomić na wielu energooszczędnych, bezprzewodowych urządzeniach, takich jak\cite{contiki-hardware-www}: \textbf{CC2538}, \textbf{Sensortag}, \textbf{CC2650}
+
+\paragraph{Windows 10 IoT Core}\cite{windows-iot-www} to również system operacyjny, jest to wersja Windows 10, która została zoptymalizowana dla małych urządzeń bez wyświetlacza, oraz które są uruchamiane na \textbf{Raspberry Pi} 2 i 3, \textbf{Arrow DragonBoard 410c} i \textbf{MinnowBoard MAX}. 
+Windows 10 IoT Core wykorzystuje bogate, uniwersalne \textbf{API - Universal Windows Platform (UWP)}. UWP API pozwala na tworzenie aplikacji, która może być używana na wielu urządzeniach, telefonach lub komputerach i udostępnia dostęp do tysięcy urządzeń Windows, które można wykorzystywać w projekcie.
+
+Windows 10 IoT Core wspiera łatwe w użyciu Arduino Wiring API używane w Arduino, oraz biblioteki do pezpośredniego dostępu do urządzeń. Aby tworzyć aplikacje można również używać narzędzia Visual Studio.
+
+
+\paragraph{Raspberry Pi}\cite{raspberry-www} w odróżnieniu od prezentowanych tutaj rozwiązań jest to platforma komputerowa, która może posiadać zainstalowany system Linux, jak i Windows 10 IoT Core.
+
+\paragraph{Zetta}\cite{zetta-www} (An API-First Internet of Things Platform) jest to platforma open source zbudowana na Node.js, aby zapewnić możliwość tworzenia serwerów Internetu Rzeczy, które są uruchomione na rozproszonych komputerach. Zetta łączy REST API, WebSockets i reaktywne programowanie - idealne dla łączenia wielu urządzeń w data-intensive, aplikacje czasu rzeczywistego.
+
+\paragraph{Podsumowanie:} Pomijając aspekty techniczne, przedstawione systemy mają kilka ważnych, łatwo widocznych cech wspólnych, które powinien posiadać również system implementowany w ramach projektu:
+
+\begin{itemize}
+	\item efektywna komunikacja np. standard Wi-Fi
+	\item energooszczędność urządzeń, mimo ciągłej aktywności
+	\item responsywność oraz stabilnosć systemu
+	\item niezawodność komunikacji
+\end{itemize}
+
+
+\subsection{Wizja produktu}
+Finalnym produktem powinien być stabilny prototyp urządzenia, połączony z modułem ESP8266, posiadający przynajmniej jeden czujnik. Użytkownik powinien mieć możliwość zdalnego starowania tym urządzeniem za pomocą mobilnej aplikacji. System powinien składać się przynajmniej z trzech urządzeń, każde z nich powinno aputomatucznie łączyć się do sieci Wi-Fi po uruchomieniu. 
+
+Dodatkowo, system powinien oferować wygodny interfejs dostępny dla użytkownika końcowego. Udostępnienie API poprzez sterowanie urządzeniami za pomocą telnetu pozwoli na programowy dostęp do sterowania urządzeń z poziomu dowolnego języka programowania. Powinny również zostać zaimplementowane mechanizmy autentykacji zlecanych operacji. Oprócz dostępu programowego, planowana jest implementacja graficznego interfejsu mobilnego, przeznaczonego dla użytkowników\cite{kukdm-art}.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/fig01-arch-overview.png}
+	\caption[Wizja architektury systemu.]{Wizja miejsca użytkownika, budowy urządzenia, oraz sposobu komunikacji}
+	\label{fig:arch-overview}
+\end{figure}
+
+Wizję budowy urządzenia przedstawia \autoref{fig:arch-overview}.
+
+\subsection{Analiza zagrożeń}
+Wykonalność projektu jest obarczona pewnym ryzykiem. Jest ono głównie związane z możliwą nieznajomością obranych w późniejszym czasie technologii oraz małym dościadczeniem w dziedzinie Internetu rzeczy.
+
+Kolejnym zagrożeniem jest ograniczony czas. Proponowane rozwiązanie zakłada stworzenie prototypu urządzenia, a następnie aplikacji, więc swtorzenie układu będzie konieczne do uruchomienia i przetestowania całości.

@@ -1,0 +1,47 @@
+\section{Zakres funkcjonalności}
+\label{sec:zakres-funkcjonalnosci}
+System powinien oferować funkcjonalność typową dla innych, podobnych systemów storageowych. Rozdział ten przedstawia listę najważniejszych wymagań funkcjonalnych i niefunkcjonalnych.
+
+\subsection{Kontekst użytkowania}
+
+\paragraph{Aktorzy:} System przewiduje tylko jeden typ aktora - \textbf{użytkownika końcowego} (ang. \textit{end-user}). Celem użytkownika jest umieszczenie w systemie swoich plików i wykonywanie na nich podstawowych operacji CRUD (\textit{Create, Read, Update, Delete}). Mimo że system jest zbiorem heterogenicznych magazynów, dla użytkownika stanowi jednolitą całość. Użytkownik traktuje system jako usługę (\textit{storage service}), dostępną w sieci pod określonym adresem IP. System oferuje użytkownikowi możliwość skorzystania z graficznego panelu w celu wygodnego dostępu do plików lub wysłania zapytania i otrzymania odpowiedzi z użyciem protokołu HTTP poprzez dostępne API.
+
+\paragraph{Współpracujące systemy:} System jest samodzielną aplikacją. Nie wymaga współpracy z innymi systemami.
+
+\subsection{Wymagania funkcjonalne}
+Wymagania dotyczące funkcjonalności, stawiane systemom przechowującym pliki, zawsze są podobne. Użytkownik końcowy powinien mieć możliwość:
+\begin{itemize}
+	\item wykonywania operacji na własnych plikach:
+	\begin{itemize}
+		\item utworzenie pliku - wysłanie lokalnego pliku do systemu
+		\item modyfikacja pliku - podmiana zawartości pliku istniejącego w systemie
+		\item odczyt pliku - pobranie pliku w postaci ciągu bajtów
+		\item usunięcie pliku - permamentne usunięcie pliku i metadanych z systemu
+		\item wyszukanie pliku - otrzymanie odpowiedzi czy plik znajduje się w systemie
+	\end{itemize}
+	\item pobrania listy wszystkich swoich plików
+	\item udostępnienia własnych plików w trybie do odczytu innym użytkownikom
+\end{itemize}
+
+Obecny projekt i wymagania nie przewidują roli administratora. Jedynym jego zadaniem będzie instalacja i konfiguracja systemu na zespole komunikujących się maszyn.
+
+\subsection{Inne wymagania}
+Pozostałe cechy, jakie powinien przejawiać system, zebrane na podstawie wizji i konsultacji z klientem:
+\begin{itemize}
+	\item system powinien być aplikacją rozproszoną, zdecentralizowaną, pozbawioną \textit{single point of failure}
+	\item system powinien być możliwy do uruchomienia na klastrze obliczeniowym złożonym z kilku maszyn pracujących pod kontrolą różnych systemów
+	\item powinna istnieć łatwa możliwość dodawania nowych węzłów do systemu (w celu zwięzszenia zasobów obliczeniowych)
+	\item system powinien gromadzić i analizować informacje o akcjach użytkowników
+	\item zachowanie użytkownika (wykonywane przez niego operacje) powinno mieć relany wpływ na priorytet jego zapytań
+	\item system powinien oferować wygodny dostęp do systemu poprzez graficzny interfejs użytkownika dostępny z przeglądarki internetowej
+	\item system powinien oferować programowy dostęp do plików porzez protokół HTTP, eksponując REST API
+\end{itemize}
+
+Oprócz wymagań \textbf{produktowych}, określono również wymaganie \textbf{organizacyjne}, dotyczące procesu wytwarzania:
+\begin{itemize}
+	\item wykorzystanym procesem będzie prototypowanie ewolucyjne
+	\item produkt wraz z dokumentacją powinien być dostarczony najpóźniej do stycznia 2015
+	\item dokumentacja powinna składać się z dokumentacji technicznej, dokumentacji procesowej oraz podręcznika użytkownika
+\end{itemize}
+
+Obranie takiej metodologii pozwoli szybko doprowadzić do dostarczenia początkowej, działającej wersji systemu, a klient będzie miał realny wpływ na proces rozwoju aplikacji.
