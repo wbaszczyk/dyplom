@@ -1,47 +1,41 @@
-\section{Zakres funkcjonalności}
-\label{sec:zakres-funkcjonalnosci}
-System powinien oferować funkcjonalność typową dla innych, podobnych systemów storageowych. Rozdział ten przedstawia listę najważniejszych wymagań funkcjonalnych i niefunkcjonalnych.
+\section{Hardware urządzenia}
+\label{sec:hardware}
+Urządzenia zostały wykonane samodzielnie. Powstały dwa prototypy, pierwszy zncznie większy oferuje podobną funkcjonalność do drugiego. 
 
-\subsection{Kontekst użytkowania}
+\subsection{Pierwszy prototyp}
 
-\paragraph{Aktorzy:} System przewiduje tylko jeden typ aktora - \textbf{użytkownika końcowego} (ang. \textit{end-user}). Celem użytkownika jest umieszczenie w systemie swoich plików i wykonywanie na nich podstawowych operacji CRUD (\textit{Create, Read, Update, Delete}). Mimo że system jest zbiorem heterogenicznych magazynów, dla użytkownika stanowi jednolitą całość. Użytkownik traktuje system jako usługę (\textit{storage service}), dostępną w sieci pod określonym adresem IP. System oferuje użytkownikowi możliwość skorzystania z graficznego panelu w celu wygodnego dostępu do plików lub wysłania zapytania i otrzymania odpowiedzi z użyciem protokołu HTTP poprzez dostępne API.
+Schemat płytki PCB tego prototypu przedstawia \autoref{fig:pcb_1}. Płytka ta jest trzykrotnie większa od prototypu w wersji drugiej \autoref{fig:pcb_2}. Widać, że odległości między ścieżkami zostały skompresowane do minimum. 
 
-\paragraph{Współpracujące systemy:} System jest samodzielną aplikacją. Nie wymaga współpracy z innymi systemami.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fig02-PCBv1.png}
+	\caption[Schemat płytki PCB v1.]{Schemat płytki PCB w wersji I}
+	\label{fig:pcb_1}
+\end{figure}
 
-\subsection{Wymagania funkcjonalne}
-Wymagania dotyczące funkcjonalności, stawiane systemom przechowującym pliki, zawsze są podobne. Użytkownik końcowy powinien mieć możliwość:
-\begin{itemize}
-	\item wykonywania operacji na własnych plikach:
-	\begin{itemize}
-		\item utworzenie pliku - wysłanie lokalnego pliku do systemu
-		\item modyfikacja pliku - podmiana zawartości pliku istniejącego w systemie
-		\item odczyt pliku - pobranie pliku w postaci ciągu bajtów
-		\item usunięcie pliku - permamentne usunięcie pliku i metadanych z systemu
-		\item wyszukanie pliku - otrzymanie odpowiedzi czy plik znajduje się w systemie
-	\end{itemize}
-	\item pobrania listy wszystkich swoich plików
-	\item udostępnienia własnych plików w trybie do odczytu innym użytkownikom
-\end{itemize}
 
-Obecny projekt i wymagania nie przewidują roli administratora. Jedynym jego zadaniem będzie instalacja i konfiguracja systemu na zespole komunikujących się maszyn.
+\subsection{Drugi prototyp}
 
-\subsection{Inne wymagania}
-Pozostałe cechy, jakie powinien przejawiać system, zebrane na podstawie wizji i konsultacji z klientem:
-\begin{itemize}
-	\item system powinien być aplikacją rozproszoną, zdecentralizowaną, pozbawioną \textit{single point of failure}
-	\item system powinien być możliwy do uruchomienia na klastrze obliczeniowym złożonym z kilku maszyn pracujących pod kontrolą różnych systemów
-	\item powinna istnieć łatwa możliwość dodawania nowych węzłów do systemu (w celu zwięzszenia zasobów obliczeniowych)
-	\item system powinien gromadzić i analizować informacje o akcjach użytkowników
-	\item zachowanie użytkownika (wykonywane przez niego operacje) powinno mieć relany wpływ na priorytet jego zapytań
-	\item system powinien oferować wygodny dostęp do systemu poprzez graficzny interfejs użytkownika dostępny z przeglądarki internetowej
-	\item system powinien oferować programowy dostęp do plików porzez protokół HTTP, eksponując REST API
-\end{itemize}
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.3\textwidth]{images/fig03-PCBv2.png}
+	\caption[Schemat płytki PCB v2.]{Schemat płytki PCB w wersji II}
+	\label{fig:pcb_2}
+\end{figure}
 
-Oprócz wymagań \textbf{produktowych}, określono również wymaganie \textbf{organizacyjne}, dotyczące procesu wytwarzania:
-\begin{itemize}
-	\item wykorzystanym procesem będzie prototypowanie ewolucyjne
-	\item produkt wraz z dokumentacją powinien być dostarczony najpóźniej do stycznia 2015
-	\item dokumentacja powinna składać się z dokumentacji technicznej, dokumentacji procesowej oraz podręcznika użytkownika
-\end{itemize}
+\subsection{Schemat układu}
 
-Obranie takiej metodologii pozwoli szybko doprowadzić do dostarczenia początkowej, działającej wersji systemu, a klient będzie miał realny wpływ na proces rozwoju aplikacji.
+Schemat układu urządzenia przedstawia \autoref{fig:schemat_pcb}. Mamy tutaj przedstawione urządzenie \textbf{ESP8266} (Component 1), piny \textbf{Reset}, \textbf{CHPD} oraz \textbf{VCC} podpięte są do napięcia wysokiego 3,3V. Piny ozaczone jako \textbf{T1}, \textbf{T2}, \textbf{T3} to wyprowadzenia do tranzystorów, które sterują kolorami diod LED RGB. Piny \textbf{RXD} oraz \textbf{TXD} służą do wgrywania programu, wykonuje się to komendą 
+\begin{lstlisting}
+sudo ./luatool.py -p /dev/ttyUSB0 -f init.lua -t init.lua
+\end{lstlisting} 
+Narzędzie luatool\cite{luatool-www} służy do wgrywania pliku init.lua do środowiska nodemcu\cite{nodemcu-www} 
+Aby mieć możliwość wgrania środowiska nodemcu\cite{nodemcu-www} do układku ESP8266 należy zewrzeć zworkę (Header 2)
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/fig04-schemat.png}
+	\caption[Schemat układu urządzenia.]{Schemat układu urządzenia}
+	\label{fig:schemat_pcb}
+\end{figure}
+

@@ -1,14 +1,18 @@
-\section{Cel prac i wizja produktu}
-\label{sec:cel-wizja}
-Praca polega na stworzeniu infrastruktury na którą składają się urządzenia \textbf{ESP8266} ze szczególnym uwzględnieniem \textbf{topologii}, \textbf{niezawodności} jak i \textbf{uniwersalności} systemu. W pracy zbudowany został rozproszony system bazujący na układach ESP8266, realizujący komunikację z \textbf{mobilnym serwerem za pomocą zdefiniowanego interfejsu}. Zweryfikowana zostanie hipoteza o możliwości integracji modułów ESP8266 z koncepcją internetu rzeczy i możliwością dynamicznego rozszerzenia stworzonego systemu.
 
-\subsection{Charakterystyka problemu}
+ 
 
-Współcześnie istnieje bardzo wiele urządzeń komunikujących się ze sobą, tworzących swoistą sieć, nazwaną Internet rzeczy\cite{iot-art}. Jest to koncepcja, wedle której jednoznacznie identyfikowalne przedmioty mogą pośrednio lub bezpośrednio gromadzić, przetwarzać lub wymieniać dane za pośrednictwem sieci komputerowej. Do tego typu przedmiotów zaliczają się między innymi urządzenia gospodarstwa domowego, artykuły oświetleniowe i grzewcze\cite{iot-www}.
+\section{Wstęp}
+\label{sec:wstep}
+Celem pracy było zbadanie możliwośći integracji modułów \textbf{ESP8266} z koncepcją  Internetu Rzeczy (ang. Internet of Things, IoT). Cel osiągnięto poprzez stworzenie infrastruktury na którą składają się urządzenia ESP8266 ze szczególnym uwzględnieniem \textbf{topologii}, \textbf{niezawodności} jak i \textbf{uniwersalności} systemu. W pracy zbudowany został rozproszony system bazujący na układach ESP8266, realizujący komunikację z \textbf{mobilnym serwerem}.
 
-Na rynku istnieje kilka rozwiązań pozwalających na zarządzanie tymi urządzeniami. Są to między innymi opisane szerzej w \autoref{sec:existing-systems} Contiki OS, Windows 10 IoT Core, Raspberry Pi czy Zetta.
+Zaimplementowano dwa rozwiązania tego problemu, jedno bazujące na działającym, na każdym urządzeniu serwisie \textbf{telnet}, natomiast drugie na web serwisie \textbf{CoAP}. Zweryfikowana została hipoteza o możliwości integracji modułów ESP8266 z koncepcją internetu rzeczy i możliwością dynamicznego rozszerzenia stworzonego systemu.
 
-Celem projektu było stworzenie systemu o podobnej funkcjonalności, pozwalającej użytkownikom zarządzać, zbierać dane, sterować różnymi urządzeniami. Użytkownicy mają mieć wygodny i prosty w obsłudze interfejs. 
+\subsection{Motywacja - charakterystyka problemu}
+Istotą Internetu rzeczy (ang. Internet of Things, IoT) jest możliwość połączenia w sieć każdego rodzaju urządzeń. Koncepcja ta zakłada stworzenie takiej infrastruktury, która połączy ze sobą urządzenia codziennego użytku, w calu dostarczenia nowych funkcjonalności i usług. W nadchodzącym czasie będziemy mieli możliwość obserwacji jak fundamentalnie zmienia się możliwość integracji świata fizycznego, ze światem urządzeń cyfrowych. 
+
+Współcześnie istnieje bardzo wiele urządzeń komunikujących się ze sobą, tworzących swoistą sieć, nazwaną Internet rzeczy\cite{iot-art}. Jest to koncepcja, wedle której jednoznacznie identyfikowalne przedmioty mogą pośrednio lub bezpośrednio gromadzić, przetwarzać lub wymieniać dane za pośrednictwem sieci komputerowej. 
+
+Na rynku istnieje kilka rozwiązań pozwalających na zarządzanie tymi urządzeniami. Są to między innymi opisane szerzej w \autoref{sec:existing-systems} Contiki OS, Windows 10 IoT Core, Raspberry Pi czy Zetta. Celem pracy było stworzenie systemu o podobnej funkcjonalności, pozwalającej użytkownikom zarządzać, zbierać dane, sterować różnymi urządzeniami. Użytkownicy mają mieć wygodny i prosty w obsłudze interfejs. 
 
 Przyczyna powstania pomysłu, oraz problem i cel projektu, mając na uwadze przedstawione powyżej \textbf{tezy}, można formalnie przedstawić następująco:
 
@@ -57,7 +61,25 @@ Windows 10 IoT Core wspiera łatwe w użyciu Arduino Wiring API używane w Ardui
 \end{itemize}
 
 
-\subsection{Wizja produktu}
+\section{Sformułowanie problemu}
+\label{sec:sformulowanie-problemu}
+Zawiera precyzyjne, wyczerpujące sformułowania problemów badawczego i projektowego, jakie zostaną w pracy rozwiązane. Sformułowania te wykorzystują aktualny formalizm oraz terminologię specyficzne dla dziedziny pracy. Są one odniesione do aktualnego stanu wiedzy, co potwierdzać muszą stosowne referencje. Ta część pracy zawiera w szczególności analizę zapotrzebowań projektu software będącego pożądanym składnikiem pracy magisterskiej w naukach technicznych w dyscyplinie informatyka.
+
+\subsection{Problem badawczy}
+
+\subsection{Problem projektowy}
+
+\subsection{Analiza zagrożeń}
+Wykonalność projektu jest obarczona pewnym ryzykiem. Jest ono głównie związane z możliwą nieznajomością obranych w późniejszym czasie technologii oraz małym dościadczeniem w dziedzinie Internetu rzeczy.
+
+Kolejnym zagrożeniem jest ograniczony czas. Proponowane rozwiązanie zakłada stworzenie prototypu urządzenia, a następnie aplikacji, więc swtorzenie układu będzie konieczne do uruchomienia i przetestowania całości.
+
+
+\section{Metodyka rozwiązania}
+\label{sec:metodyka-rozwiazania}
+W tej części opisane są szczegółowo metody rozwiązania postawionego problemu. Opis ten powinien być precyzyjny, wyczerpujący i zgodny z aktualnym formalizmem oraz terminologią specyficznymi dla dziedziny pracy. Powinien on w szczególności zawierać definicje stosowanych metod numerycznych, algorytmów oraz struktur danych.
+
+\subsection{Rozwiązanie bazujące na standardzie telnet}
 Finalnym produktem powinien być stabilny prototyp urządzenia, połączony z modułem ESP8266, posiadający przynajmniej jeden czujnik. Użytkownik powinien mieć możliwość zdalnego starowania tym urządzeniem za pomocą mobilnej aplikacji. System powinien składać się przynajmniej z trzech urządzeń, każde z nich powinno aputomatucznie łączyć się do sieci Wi-Fi po uruchomieniu. 
 
 Dodatkowo, system powinien oferować wygodny interfejs dostępny dla użytkownika końcowego. Udostępnienie API poprzez sterowanie urządzeniami za pomocą telnetu pozwoli na programowy dostęp do sterowania urządzeń z poziomu dowolnego języka programowania. Powinny również zostać zaimplementowane mechanizmy autentykacji zlecanych operacji. Oprócz dostępu programowego, planowana jest implementacja graficznego interfejsu mobilnego, przeznaczonego dla użytkowników\cite{kukdm-art}.
@@ -71,7 +93,8 @@ Dodatkowo, system powinien oferować wygodny interfejs dostępny dla użytkownik
 
 Wizję budowy urządzenia przedstawia \autoref{fig:arch-overview}.
 
-\subsection{Analiza zagrożeń}
-Wykonalność projektu jest obarczona pewnym ryzykiem. Jest ono głównie związane z możliwą nieznajomością obranych w późniejszym czasie technologii oraz małym dościadczeniem w dziedzinie Internetu rzeczy.
+\subsection{Rozwiązanie bazujące na CoAP Web Service}
 
-Kolejnym zagrożeniem jest ograniczony czas. Proponowane rozwiązanie zakłada stworzenie prototypu urządzenia, a następnie aplikacji, więc swtorzenie układu będzie konieczne do uruchomienia i przetestowania całości.
+\section{Podsumowanie i wnioski}
+\label{sec:podsumowanie-wnioski}
+Podsumowanie stanowi krótkie streszczenie zawartości pracy uwypuklające oryginalne wyniki autora. Zawiera ono również krótkie uzasadnienie dla weryfikacji tezy pracy, oparte na tych wynikach. Wnioski powinny dotyczyć stopnia realizacji przyjętego plany badawczo – projektowego oraz możliwości jego kontynuacji, jak również możliwości zastosowania uzyskanych i planowanych rezultatów w praktyce.
