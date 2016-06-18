@@ -25,12 +25,6 @@ Schemat płytki PCB tego prototypu przedstawia \autoref{fig:pcb_1}. Płytka ta j
 
 \subsection{Schemat układu}
 
-Schemat układu urządzenia przedstawia \autoref{fig:schemat_pcb}. Mamy tutaj przedstawione urządzenie \textbf{ESP8266} (Component 1), piny \textbf{Reset}, \textbf{CHPD} oraz \textbf{VCC} podpięte są do napięcia wysokiego 3,3V. Piny ozaczone jako \textbf{T1}, \textbf{T2}, \textbf{T3} to wyprowadzenia do tranzystorów, które sterują kolorami diod LED RGB. Piny \textbf{RXD} oraz \textbf{TXD} służą do wgrywania programu, wykonuje się to komendą 
-\begin{lstlisting}
-sudo ./luatool.py -p /dev/ttyUSB0 -f init.lua -t init.lua
-\end{lstlisting} 
-Narzędzie luatool\cite{luatool-www} służy do wgrywania pliku init.lua do środowiska nodemcu\cite{nodemcu-www} 
-Aby mieć możliwość wgrania środowiska nodemcu\cite{nodemcu-www} do układku ESP8266 należy zewrzeć zworkę (Header 2)
 
 \begin{figure}[!htbp]
 	\centering
@@ -39,3 +33,9 @@ Aby mieć możliwość wgrania środowiska nodemcu\cite{nodemcu-www} do układku
 	\label{fig:schemat_pcb}
 \end{figure}
 
+Schemat układu urządzenia przedstawia \autoref{fig:schemat_pcb}. Mamy tutaj przedstawione urządzenie \texttt{ESP8266} (Component 1), piny \texttt{Reset}, \texttt{CHPD} oraz \texttt{VCC} podpięte są do napięcia wysokiego 3,3V. Piny ozaczone jako \texttt{T1}, \texttt{T2}, \texttt{T3} to wyprowadzenia do tranzystorów, które sterują kolorami diod LED RGB. Piny \texttt{{RXD} oraz \texttt{TXD} służą do wgrywania programu, wykonuje się to komendą 
+\begin{lstlisting}
+sudo ./luatool.py -p /dev/ttyUSB0 -f init.lua -t init.lua
+\end{lstlisting} 
+Narzędzie luatool\cite{luatool-www} służy do wgrywania pliku init.lua do środowiska nodemcu\cite{nodemcu-www} 
+Aby mieć możliwość wgrania środowiska nodemcu\cite{nodemcu-www} do układku ESP8266 należy zewrzeć zworkę (Header 2)

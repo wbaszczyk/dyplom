@@ -1,11 +1,8 @@
-
- 
-
 \section{Wstęp}
 \label{sec:wstep}
-Celem pracy było zbadanie możliwośći integracji modułów \textbf{ESP8266} z koncepcją  Internetu Rzeczy (ang. Internet of Things, IoT). Cel osiągnięto poprzez stworzenie infrastruktury na którą składają się urządzenia ESP8266 ze szczególnym uwzględnieniem \textbf{topologii}, \textbf{niezawodności} jak i \textbf{uniwersalności} systemu. W pracy zbudowany został rozproszony system bazujący na układach ESP8266, realizujący komunikację z \textbf{mobilnym serwerem}.
+Celem pracy było zbadanie możliwośći integracji modułów \texttt{ESP8266} z koncepcją  Internetu Rzeczy (ang. Internet of Things, IoT). Cel osiągnięto poprzez stworzenie infrastruktury na którą składają się urządzenia ESP8266 ze szczególnym uwzględnieniem \texttt{topologii}, \texttt{niezawodności} jak i \texttt{uniwersalności} systemu. W pracy zbudowany został rozproszony system bazujący na układach ESP8266, realizujący komunikację z \texttt{mobilnym serwerem}.
 
-Zaimplementowano dwa rozwiązania tego problemu, jedno bazujące na działającym, na każdym urządzeniu serwisie \textbf{telnet}, natomiast drugie na web serwisie \textbf{CoAP}. Zweryfikowana została hipoteza o możliwości integracji modułów ESP8266 z koncepcją internetu rzeczy i możliwością dynamicznego rozszerzenia stworzonego systemu.
+Zaimplementowano dwa rozwiązania tego problemu, jedno bazujące na działającym, na każdym urządzeniu serwisie \texttt{telnet}, natomiast drugie na web serwisie \texttt{CoAP}. Zweryfikowana została hipoteza o możliwości integracji modułów ESP8266 z koncepcją internetu rzeczy i możliwością dynamicznego rozszerzenia stworzonego systemu.
 
 \subsection{Motywacja - charakterystyka problemu}
 Istotą Internetu rzeczy (ang. Internet of Things, IoT) jest możliwość połączenia w sieć każdego rodzaju urządzeń. Koncepcja ta zakłada stworzenie takiej infrastruktury, która połączy ze sobą urządzenia codziennego użytku, w calu dostarczenia nowych funkcjonalności i usług. W nadchodzącym czasie będziemy mieli możliwość obserwacji jak fundamentalnie zmienia się możliwość integracji świata fizycznego, ze światem urządzeń cyfrowych. 
@@ -14,12 +11,12 @@ Współcześnie istnieje bardzo wiele urządzeń komunikujących się ze sobą, 
 
 Na rynku istnieje kilka rozwiązań pozwalających na zarządzanie tymi urządzeniami. Są to między innymi opisane szerzej w \autoref{sec:existing-systems} Contiki OS, Windows 10 IoT Core, Raspberry Pi czy Zetta. Celem pracy było stworzenie systemu o podobnej funkcjonalności, pozwalającej użytkownikom zarządzać, zbierać dane, sterować różnymi urządzeniami. Użytkownicy mają mieć wygodny i prosty w obsłudze interfejs. 
 
-Przyczyna powstania pomysłu, oraz problem i cel projektu, mając na uwadze przedstawione powyżej \textbf{tezy}, można formalnie przedstawić następująco:
+Przyczyna powstania pomysłu, oraz problem i cel projektu, mając na uwadze przedstawione powyżej \texttt{tezy}, można formalnie przedstawić następująco:
 
 \begin{itemize}
-	\item \textbf{Przyczyna:} Diametralnie zwiększająca się ilość urządzeń wchodzących w skład Internetu rzeczy\cite{iot-art}.
-	\item \textbf{Problem:} Stworzenie uniwersalnego interfejsu do efektywnego zarządzania tymi urządzeniami.
-	\item \textbf{Rozwiązanie:} Dostarczenie modelu działającego w uproszczonym środowisku, dostarczającego wysokopoziomowy interfejs.
+	\item \texttt{Przyczyna:} Diametralnie zwiększająca się ilość urządzeń wchodzących w skład Internetu rzeczy\cite{iot-art}.
+	\item \texttt{Problem:} Stworzenie uniwersalnego interfejsu do efektywnego zarządzania tymi urządzeniami.
+	\item \texttt{Rozwiązanie:} Dostarczenie modelu działającego w uproszczonym środowisku, dostarczającego wysokopoziomowy interfejs.
 \end{itemize}
 
 \subsection{Przegląd istniejących rozwiązań}
@@ -35,14 +32,14 @@ Możliwość zdalnego konfigurowania urządzeń wchodzących w skład Internetu 
 
 Istnieje kilka projektów adresujących ten problem. Przykładowe z nich to Contiki OS, Windows 10 IoT Core, Raspberry Pi oraz Zetta. Zapoznanie się z nimi, z rozwiązaniami w nich stosowanymi oraz z oferowanymi przez nie interfejsami pozwoliło uniknąć wielu błędów i problemów występujących podczas projektowania własnego systemu.
 
-\paragraph{Contiki OS}\cite{contiki-www} (The Open Source OS for the Internet of Things) \textbf{Contiki} łączy małe, tanie i energooszczędne mikrokontrolery z internetem. Contiki wspiera w pełni standard \textbf{IPv6} i \textbf{IPv4}, wraz z energooszczędnymi bezprzewodowymi standardami: \textbf{6lowpan}, \textbf{RPL}, \textbf{CoAP}. 
+\paragraph{Contiki OS}\cite{contiki-www} (The Open Source OS for the Internet of Things) \texttt{Contiki} łączy małe, tanie i energooszczędne mikrokontrolery z internetem. Contiki wspiera w pełni standard \texttt{IPv6} i \texttt{IPv4}, wraz z energooszczędnymi bezprzewodowymi standardami: \texttt{6lowpan}, \texttt{RPL}, \texttt{CoAP}. 
 
-Contiki oferuje łatwe i szybkie tworzenie oprogramowania, aplikacje są pisane w czystym C, wraz z symulatoram \textbf{Cooja} systemy te mogą być emulowane przed wrzucemeniem ich na hardware. Środowisko jest dostępne i całkowicie darmowe, co jest dużym plusem oprogramowania Contiki.
+Contiki oferuje łatwe i szybkie tworzenie oprogramowania, aplikacje są pisane w czystym C, wraz z symulatoram \texttt{Cooja} systemy te mogą być emulowane przed wrzucemeniem ich na hardware. Środowisko jest dostępne i całkowicie darmowe, co jest dużym plusem oprogramowania Contiki.
 
-Contiki można uruchomić na wielu energooszczędnych, bezprzewodowych urządzeniach, takich jak\cite{contiki-hardware-www}: \textbf{CC2538}, \textbf{Sensortag}, \textbf{CC2650}
+Contiki można uruchomić na wielu energooszczędnych, bezprzewodowych urządzeniach, takich jak\cite{contiki-hardware-www}: \texttt{CC2538}, \texttt{Sensortag}, \texttt{CC2650}
 
-\paragraph{Windows 10 IoT Core}\cite{windows-iot-www} to również system operacyjny, jest to wersja Windows 10, która została zoptymalizowana dla małych urządzeń bez wyświetlacza, oraz które są uruchamiane na \textbf{Raspberry Pi} 2 i 3, \textbf{Arrow DragonBoard 410c} i \textbf{MinnowBoard MAX}. 
-Windows 10 IoT Core wykorzystuje bogate, uniwersalne \textbf{API - Universal Windows Platform (UWP)}. UWP API pozwala na tworzenie aplikacji, która może być używana na wielu urządzeniach, telefonach lub komputerach i udostępnia dostęp do tysięcy urządzeń Windows, które można wykorzystywać w projekcie.
+\paragraph{Windows 10 IoT Core}\cite{windows-iot-www} to również system operacyjny, jest to wersja Windows 10, która została zoptymalizowana dla małych urządzeń bez wyświetlacza, oraz które są uruchamiane na \texttt{Raspberry Pi} 2 i 3, \texttt{Arrow DragonBoard 410c} i \texttt{MinnowBoard MAX}. 
+Windows 10 IoT Core wykorzystuje bogate, uniwersalne \texttt{API - Universal Windows Platform (UWP)}. UWP API pozwala na tworzenie aplikacji, która może być używana na wielu urządzeniach, telefonach lub komputerach i udostępnia dostęp do tysięcy urządzeń Windows, które można wykorzystywać w projekcie.
 
 Windows 10 IoT Core wspiera łatwe w użyciu Arduino Wiring API używane w Arduino, oraz biblioteki do pezpośredniego dostępu do urządzeń. Aby tworzyć aplikacje można również używać narzędzia Visual Studio.
 
@@ -63,9 +60,68 @@ Windows 10 IoT Core wspiera łatwe w użyciu Arduino Wiring API używane w Ardui
 
 \section{Sformułowanie problemu}
 \label{sec:sformulowanie-problemu}
-Zawiera precyzyjne, wyczerpujące sformułowania problemów badawczego i projektowego, jakie zostaną w pracy rozwiązane. Sformułowania te wykorzystują aktualny formalizm oraz terminologię specyficzne dla dziedziny pracy. Są one odniesione do aktualnego stanu wiedzy, co potwierdzać muszą stosowne referencje. Ta część pracy zawiera w szczególności analizę zapotrzebowań projektu software będącego pożądanym składnikiem pracy magisterskiej w naukach technicznych w dyscyplinie informatyka.
+Zawiera precyzyjne, wyczerpujące sformułowania problemów badawczego i projektowego, jakie zostaną w pracy rozwiązane. Są one odniesione do aktualnego stanu wiedzy, co potwierdzać muszą stosowne referencje. Ta część pracy zawiera w szczególności analizę zapotrzebowań projektu software będącego pożądanym składnikiem pracy magisterskiej w naukach technicznych w dyscyplinie informatyka.
 
-\subsection{Problem badawczy}
+\subsection{Problem badawczy - struktura IoT}
+Internet Rzeczy należy rozumieć jako system, w którym przedmioty mogą komunikować się między sobą, za pośrednictwem człowieka lub bez jego udziału.
+Dobrym schematem obrazującym tą koncepcję jest \autoref{fig:iot_base}. Widać tutaj wyraźnie, że to podejście jest uniwersalne. Z rysunku wynika, że istnieje podział na cztery główne części:
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/iot.png}
+	\caption[Idea funkcjonowania rozwiązań Internetu Rzeczy.]{Idea funkcjonowania rozwiązań Internetu Rzeczy}
+	\label{fig:iot_base}
+\end{figure}
+
+\subsubsection{Przedmioty wyposażone w czujniki}
+Naszą sieć IoT możemy zbudować praktycznie w każdej dziedzinie. ża pomocą jednego systemu mamy możliwość sterowania każdym rodzajem urządzeń - od sprzętów AGD/RTV po samochody, czy domy. Sfery zastosowań urządzeń IoT przedstawia \autoref{fig:zastosowania_iot}. Widać wyraźnie, że istnieją one wszędzie, potwierdzeniem tego faktu jest \autoref{fig:ile_urzadzen} opisany szerzej w \autoref{sec:benefits_conclusions}.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/zastosowania.png}
+	\caption[Obszar zastosowania IoT.]{Obszar zastosowania IoT}
+	\label{fig:zastosowania_iot}
+\end{figure}
+\subsubsection{Sieć komputerowa, która je łączy}
+Tutaj mamy pole do popisu, bo tak naprawdę istnieje bardzo wiele interfejsów pozwalających na łączenie urządzeń w jedną integralną całość. Do wyboru mamy od tych bardziej znanych standardów m.in:
+
+\begin{itemize}
+	\item Wi-Fi
+	\item Bluetooth
+\end{itemize}
+Po te mniej znane, jednak równie często wykorzystywane:
+\begin{itemize}
+	\item NFC 
+	\item Z-Wave 
+\end{itemize}
+
+\subsubsection{Systemy, które przetwarzają i przesyłają dane}
+Posiadając już podpięte urządzenia do sieci, musimy jeszcze mieć czym nimi sterować/przetwarzać dane itp. Mamy możliwość instalacji urządzeń tych bardziej profesjonalnych, dedykowanych dla konkretnego klienta, jak np. \autoref{fig:panel_ogrzewanie}. Jest to panel do sterowania ogrzewaniem w domu firmy proav. Poprzez te bardziej uniwersalne, jak chociażby smartphone z systemem android/ios/windows.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/panel_ogrzewanie.png}
+	\caption[Panel do sterowania ogrzewaniem.]{Panel do sterowania ogrzewaniem}
+	\label{fig:panel_ogrzewanie}
+\end{figure}
+
+\subsubsection{Wnioski i informacje przekładające się na korzyści biznesowe}
+\label{sec:benefits_conclusions}
+Innym zobrazowaniem idei Internetu Rzeczy jest \autoref{fig:iot_short}. Widać tutaj wszystko to co zostało po krótce przedstawione w tym rozdziale. 
+Ważnym wyznacznikiem, który przekonał mnie do napisania tej pracy był fakt, że libczba urządzeń IoT drastycznie wzrasta w czasie. Przedstawia to \autoref{fig:ile_urzadzen}, przewidywania są takie, że ich liczba do 2020 wzrośnie do 25 bilionów i już dawno przekroczyła liczbę ludności na świecie.  
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/iot_short.png}
+	\caption[System wymiany informacji.]{System wymiany informacji}
+	\label{fig:iot_short}
+\end{figure}
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/ile_urzadzen.png}
+	\caption[Liczba urządzeń Internetu Rzeczy.]{Liczba urządzeń Internetu Rzeczy}
+	\label{fig:ile_urzadzen}
+\end{figure}
+
 
 \subsection{Problem projektowy}
 
@@ -95,6 +151,16 @@ Wizję budowy urządzenia przedstawia \autoref{fig:arch-overview}.
 
 \subsection{Rozwiązanie bazujące na CoAP Web Service}
 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/schemat.png}
+	\caption[Wizja architektury systemu w standardzie CoAP.]{Wizja miejsca użytkownika, sposobu komunikacji w systemie w standardzie CoAP}
+	\label{fig:schemat}
+\end{figure}
+Wizję budowy urządzenia przedstawia \autoref{fig:schemat}.
+
 \section{Podsumowanie i wnioski}
 \label{sec:podsumowanie-wnioski}
 Podsumowanie stanowi krótkie streszczenie zawartości pracy uwypuklające oryginalne wyniki autora. Zawiera ono również krótkie uzasadnienie dla weryfikacji tezy pracy, oparte na tych wynikach. Wnioski powinny dotyczyć stopnia realizacji przyjętego plany badawczo – projektowego oraz możliwości jego kontynuacji, jak również możliwości zastosowania uzyskanych i planowanych rezultatów w praktyce.
+
+
