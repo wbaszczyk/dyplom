@@ -75,18 +75,35 @@ Dobrym wyznacznikiem zmian czekających nas w najbliższym czasie jest \autoref{
 
 
 \subsection{Rozwój i bariery}
-Istnieją pewne aspekty, które są wyznacznikiem rozwoju systemu działającego pod szyldem Internetu Rzeczy. Proces miniaturyzacji jest jednym z nich, dzięki niemu możliwe jest korzystanie z mikrokontrolerów praktycznie w każdym urządzeniu. Ważnym elementem jest tutaj również rozwój technologii mobilnych i bezprzewodowego dostępu do Internetu. Te dwa główne aspekty powodują szybki rozwój IoT, jednak istnieją takie, które go hamują. Wciąż dużym ograniczeniem jest zasilanie. Baterie są coraz bardziej żywotne, jednak mają swoją wadę - trzeba je ładować. Często jest to duże ograniczenie, biorąc pod uwagę liczbę tych urządzeń działających samodzielnie. Innym ograniczeniem może okazać się protokół IPv4 (ok 4 mld urządzeń), dlatego często trzeba używać infrastruktury, która zapewni nam prywatne adresy IP. 
+\label{sec:rozwoj_bariery}
+Istnieją pewne aspekty, które są wyznacznikiem rozwoju systemu działającego pod szyldem Internetu Rzeczy. 
+Proces miniaturyzacji jest jednym z nich, dzięki niemu możliwe jest korzystanie z mikrokontrolerów praktycznie w każdym urządzeniu. Ważnym elementem jest tutaj również rozwój technologii mobilnych i bezprzewodowego dostępu do Internetu. Te dwa główne aspekty powodują szybki rozwój IoT, jednak istnieją takie, które go hamują. 
+Wciąż dużym ograniczeniem jest zasilanie. Baterie są coraz bardziej żywotne, jednak mają swoją wadę - trzeba je ładować. Często jest to duże ograniczenie, biorąc pod uwagę liczbę tych urządzeń działających samodzielnie. Innym ograniczeniem może okazać się protokół IPv4 (ok 4 mld urządzeń), dlatego często trzeba używać infrastruktury, która zapewni nam prywatne adresy IP. 
 
 Istotnym wyzwaniem jest wytworzenie jednolitych standardów dotyczących bezpieczeństwa danych i poufności. Nie chcemy doprowadzić do sytuacji, w której dostęp do inteligentnego domu dostanie nieuprawniona osoba. 
 
 \subsection{Dobór urządzenia}
-Na samym początku pojawiło się pytanie jakiego rodzaju urządzenia powinienem użyć. Pytanie to jest zasadnicze, dlatego poświęciłem dużo czasu na zgłębienie tego tematu. Przeglądając różnego rodzaju interfejsy, te bardziej uniwersalne jak i te podstawowe, doszedłem do wniosku, że warto poświęcić więcej czasu na stworzenie czegoś od nowa i nauczenie się jak takie urządzenia działają od środka. Decyzja ta była o tyle trudna, że nie byłem pewien jaki będzie miała skutek dla całej pracy. Płytkę PCB wydrukowałem ręcznie i powstały dwa prototypy tego urządzenia (więcej na ten temat w \autoref{sec:hardware}). Samo urządzenie przedstawia \autoref{fig:device}
+Na samym początku pojawiło się pytanie jakiego rodzaju urządzenia powinienem użyć. Pytanie to jest zasadnicze, dlatego poświęciłem dużo czasu na zgłębienie tego tematu. Przeglądając różnego rodzaju rozwiązania, te bardziej uniwersalne jak i te podstawowe, doszedłem do wniosku, że warto poświęcić więcej czasu na stworzenie czegoś od nowa i nauczenie się jak takie urządzenia działają od środka. Decyzja ta była o tyle trudna, że nie byłem pewien jaki będzie miała skutek dla całej pracy. Płytkę PCB wydrukowałem ręcznie i powstały dwa prototypy tego urządzenia (więcej na ten temat w \autoref{sec:hardware}). Samo urządzenie przedstawia \autoref{fig:device}
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/device.png}
 	\caption[Urządzenie PCB.]{Urządzenie PCB}
 	\label{fig:device}
 \end{figure}
+
+\subsection{Wybór optymalnego interfejsu komunikacji}
+Urządzenia IoT mają wymagania, którym należy sprostać - opisane są w \autoref{sec:rozwoj_bariery}. Jednym z takich wymagań jest oszczędność energii, której najczęściej należy dostarczać w postaci baterii. Pierwszym pomysłem, jednocześnie rozwiązaniem, które zastosowałem, była komunikacja poprzez protokół telnet. Zastosowałem ją z kilku prostych powodów:
+\begin{itemize}
+	\item jest prosty w implementacji 
+	\item nie ma dużego narzutu do obsługi komunikacji 
+	\item wysyłanie prostych komend do procesora
+\end{itemize}
+Jednak bardziej ten pomysł polegał na zbadaniu narzędzia NodeMCU\cite{nodemcu-www} niż na wykorzystaniu tego narzędzia w pracy. Dlatego po głębszej analizie projekt został przepisany używając protokołu CoAP (ang. Constrained Application Protocol). Moduł ten oferuje następujące funkcjonalności: 
+\begin{itemize}
+	\item implementuje stronę serwera oraz klienta 
+	\item metody GET/PUT/POST/DELETE są wspierane przez klienta
+	\item strona serwerowa rejestruje funkcje oraz zmienne języka Lua
+\end{itemize}
 
 \subsection{Analiza zagrożeń}
 Wykonalność projektu jest obarczona pewnym ryzykiem. Jest ono głównie związane z możliwą nieznajomością obranych w późniejszym czasie technologii oraz małym doświadczeniem w dziedzinie Internetu rzeczy.
